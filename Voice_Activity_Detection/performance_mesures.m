@@ -1,0 +1,31 @@
+function [Pcv,Pcn,Pc,Pf,S,PP]=performance_mesures(vseg,uvseg,v,uv)
+
+TC=length(vseg); % TOTAL NO OF VOICED SEGMENTS
+
+TCN=length(uvseg); % TOTAL NO OF NOISE SEGMENTS
+
+TP=length(intersect(vseg,v)); % NO OF CORRECTLY DETECTED VOICED SEGMENTS
+
+TN=length(intersect(uvseg,uv)); % NO OF CORRECTLY DETECTED NOISE SEGMENTS
+
+FN=length(vseg)-length(intersect(vseg,v)); % NO OF FALSELY DETECTED VOICED SEGMENTS
+
+FP=length(uvseg)-length(intersect(uvseg,uv)); % NO OF FALSELY DETECTED NOISE SEGMENTS
+
+%%
+
+S=TP/(TP+FN); %SENSITIVITY
+
+PP=TP/(TP+FP); %POSITIVE PREDICTIVITY
+
+%% PROBABLITIES
+
+Pcv=TP/TC; % PROB. OF CORRECTLY DETECTING VOICED SEGMENTS
+
+Pcn=TN/TCN; % PROB. OF CORRECTLY DETECTING NOISE SEGMENTS
+
+Pc=(TP+TN)/(TC+TCN); % PROB. OF CORRECTLY DETECTING SEGMENTS
+
+Pf=1-Pc; % PROB. OF FALSELY DETECTING SEGMENTS
+
+end
